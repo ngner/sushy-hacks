@@ -33,7 +33,7 @@ do
     --noautoconsole \
     --boot hd,cdrom \
     --import \
-    --disk path=/var/lib/libvirt/testPoolimages/${DISKNAME}-${node}.qcow2,pool=testPool \
+    --disk path=/var/lib/libvirt/testPoolimages/${DISKNAME}-${node}.qcow2 \
     --disk /var/lib/libvirt/boot/${ISO},device=cdrom \
     --network type=direct,source=${NETWORK},mac=aa:aa:aa:aa:aa:0${node},source_mode=bridge,model=virtio \
     --graphics vnc,port=590${node},listen=0.0.0.0${VNC_PASSWORD:+,password=$VNC_PASSWORD}
