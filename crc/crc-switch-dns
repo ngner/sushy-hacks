@@ -110,6 +110,8 @@ case "${1:-status}" in
 
     ansible-playbook \
       "$ANSIBLE_DIR/playbooks/crc-dns.yml" \
+      -k \
+      -i "$ANSIBLE_DIR/inventory" \
       -e "target_ip=$TARGET_IP"
 
     if _is_local_ip "$TARGET_IP"; then
