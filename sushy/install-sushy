@@ -33,6 +33,13 @@ EOF
 export SUSHY_TOOLS_IMAGE=${SUSHY_TOOLS_IMAGE:-"quay.io/metal3-io/sushy-tools"}
 sudo podman pull "${SUSHY_TOOLS_IMAGE}"
 
+# Open port 8000 in the libvirt firewall zone so VMs on NAT networks
+# (e.g. CRC) can reach the Redfish endpoint on the host.
+if sudo firewall-cmd --state &>/dev/null; then
+  sudo firewall-cmd --zone=libvirt --add-port=8000/tcp --permanent
+  sudo firewall-cmd --zone=libvirt --add-port=8000/tcp
+fi
+
 # Use quadlet to make systemd service
 # Note the stop timeout added as the service needs to be killed.
 
